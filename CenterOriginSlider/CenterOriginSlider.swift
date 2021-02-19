@@ -78,6 +78,8 @@ open class CenterOriginSlider: UISlider {
     /// If true, light impact feedback will occur when the value of the slider is changed to the center value.
     open var isCenterFeedbackEnabled: Bool = true
     
+    open var activeCenter: Bool = false
+    
     override open var bounds: CGRect {
         didSet {
             prepareTrackImage()
@@ -85,7 +87,11 @@ open class CenterOriginSlider: UISlider {
         }
     }
     
-    private var centerValue: Float { return (minimumValue + maximumValue) / 2 }
+    private var centerValue: Float {
+        if activeCenter {
+            return 0
+        }
+        return (minimumValue + maximumValue) / 2 }
     private var minimumBackgroundImage = UIImage()
     private var maximumBackgroundImage = UIImage()
     private var minimumTrackStretchableImage = UIImage()
